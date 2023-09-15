@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_is_empty
 import 'package:flutter/material.dart';
+import 'package:movie_app/detalhes_filme/detalhes_filme_page.dart';
 import 'package:movie_app/home/controllers/home_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -38,7 +39,6 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-
   @override
   void initState() {
     controller.getMovies();
@@ -50,7 +50,8 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('MathFlix',
-            style: GoogleFonts.montserrat(color: Colors.white60, fontWeight: FontWeight.bold)),
+            style: GoogleFonts.montserrat(
+                color: Colors.white60, fontWeight: FontWeight.bold)),
         backgroundColor: Colors.black45,
       ),
       backgroundColor: Colors.black87,
@@ -89,79 +90,81 @@ class _HomePageState extends State<HomePage> {
                                       decoration: const BoxDecoration(
                                           color: Colors.white38)),
                                   CarouselSlider.builder(
-                                      options: CarouselOptions(
-                                        autoPlay: false,
-                                        enlargeCenterPage: true,
-                                        viewportFraction: 0.4,
-                                        aspectRatio: 2.0,
-                                        initialPage: 1,
-                                      ),
-                                      itemCount: controller
-                                          .lstResultsFilterVoteRage8.length,
-                                      itemBuilder: (BuildContext context,
-                                              int index, int pageViewIndex) =>
-                                          Column(
-                                            children: [
-                                              const SizedBox(
-                                                height: 16,
-                                              ),
-                                              Flexible(
-                                                child: Container(
-                                                  height: 250,
-                                                  width: 250,
-                                                  decoration:
-                                                      const BoxDecoration(
-                                                          color:
-                                                              Colors.black54),
-                                                  child: Column(
-                                                    children: [
-                                                      Flexible(
-                                                          child: Image.network(
-                                                        'https://image.tmdb.org/t/p/original/${controller.lstResultsFilterVoteRage8[index].posterPath ?? ''}',
-                                                        fit: BoxFit.contain,
-                                                      )),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                left: 8,
-                                                                right: 8),
-                                                        child: Text(
-                                                          'Avaliação: ${controller.lstResultsFilterVoteRage8[index].voteAverage}',
-                                                          style: GoogleFonts
-                                                              .montserrat(
-                                                                  color: Colors
-                                                                      .white54),
-                                                        ),
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                left: 8,
-                                                                right: 8),
-                                                        child: Text(
-                                                            controller
-                                                                    .lstResultsFilterVoteRage8[
-                                                                        index]
-                                                                    .title ??
-                                                                '',
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                            style: GoogleFonts
-                                                                .montserrat(
-                                                                    color: Colors
-                                                                        .white)),
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 8,
-                                                      ),
-                                                    ],
+                                    options: CarouselOptions(
+                                      autoPlay: false,
+                                      enlargeCenterPage: true,
+                                      viewportFraction: 0.4,
+                                      aspectRatio: 2.0,
+                                      initialPage: 1,
+                                    ),
+                                    itemCount: controller
+                                        .lstResultsFilterVoteRage8.length,
+                                    itemBuilder: (BuildContext context,
+                                            int index, int pageViewIndex) =>
+                                        Column(
+                                      children: [
+                                        const SizedBox(
+                                          height: 16,
+                                        ),
+                                        Flexible(
+                                          child: GestureDetector(
+                                            child: Container(
+                                              height: 250,
+                                              width: 250,
+                                              decoration: const BoxDecoration(
+                                                  color: Colors.black54),
+                                              child: Column(
+                                                children: [
+                                                  Flexible(
+                                                      child: Image.network(
+                                                    'https://image.tmdb.org/t/p/original/${controller.lstResultsFilterVoteRage8[index].posterPath ?? ''}',
+                                                    fit: BoxFit.contain,
+                                                  )),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 8, right: 8),
+                                                    child: Text(
+                                                      'Avaliação: ${controller.lstResultsFilterVoteRage8[index].voteAverage}',
+                                                      style: GoogleFonts
+                                                          .montserrat(
+                                                              color: Colors
+                                                                  .white54),
+                                                    ),
                                                   ),
-                                                ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 8, right: 8),
+                                                    child: Text(
+                                                        controller
+                                                                .lstResultsFilterVoteRage8[
+                                                                    index]
+                                                                .title ??
+                                                            '',
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        style: GoogleFonts
+                                                            .montserrat(
+                                                                color: Colors
+                                                                    .white)),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 8,
+                                                  ),
+                                                ],
                                               ),
-                                            ],
-                                          )),
+                                            ),
+                                            onTap: () {
+                                              controller
+                                                  .selecionarFilmeVoteRage8(
+                                                      index);
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
 
                                   // CAROUSEL 2
 
@@ -195,57 +198,74 @@ class _HomePageState extends State<HomePage> {
                                                 height: 16,
                                               ),
                                               Flexible(
-                                                child: Container(
-                                                  height: 250,
-                                                  width: 250,
-                                                  decoration:
-                                                      const BoxDecoration(
-                                                          color:
-                                                              Colors.black54),
-                                                  child: Column(
-                                                    children: [
-                                                      Flexible(
-                                                          child: Image.network(
-                                                        'https://image.tmdb.org/t/p/original/${controller.lstResults[index].posterPath ?? ''}',
-                                                        fit: BoxFit.contain,
-                                                      )),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                left: 8,
-                                                                right: 8),
-                                                        child: Text(
-                                                          'Avaliação: ${controller.lstResults[index].voteAverage}',
-                                                          style: GoogleFonts
-                                                              .montserrat(
-                                                                  color: Colors
-                                                                      .white54),
-                                                        ),
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                left: 8,
-                                                                right: 8),
-                                                        child: Text(
-                                                            controller
-                                                                    .lstResults[
-                                                                        index]
-                                                                    .title ??
-                                                                '',
-                                                            textAlign: TextAlign
-                                                                .center,
+                                                child: GestureDetector(
+                                                  child: Container(
+                                                    height: 250,
+                                                    width: 250,
+                                                    decoration:
+                                                        const BoxDecoration(
+                                                            color:
+                                                                Colors.black54),
+                                                    child: Column(
+                                                      children: [
+                                                        Flexible(
+                                                            child:
+                                                                Image.network(
+                                                          'https://image.tmdb.org/t/p/original/${controller.lstResults[index].posterPath ?? ''}',
+                                                          fit: BoxFit.contain,
+                                                        )),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  left: 8,
+                                                                  right: 8),
+                                                          child: Text(
+                                                            'Avaliação: ${controller.lstResults[index].voteAverage}',
                                                             style: GoogleFonts
                                                                 .montserrat(
-                                                                    color: Colors.white)),
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 8,
-                                                      ),
-                                                    ],
+                                                                    color: Colors
+                                                                        .white54),
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  left: 8,
+                                                                  right: 8),
+                                                          child: Text(
+                                                              controller
+                                                                      .lstResults[
+                                                                          index]
+                                                                      .title ??
+                                                                  '',
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                              style: GoogleFonts
+                                                                  .montserrat(
+                                                                      color: Colors
+                                                                          .white)),
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 8,
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ),
+                                                  onTap: () {
+                                                    controller
+                                                        .selecionarFilmesTodos(
+                                                            index);
+                                                    Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute<void>(
+                                                        builder: (_) =>
+                                                            DetalhesFilmePage(controller: controller),
+                                                      ),
+                                                    );
+                                                  },
                                                 ),
                                               ),
                                             ],
@@ -264,14 +284,16 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home, color: Colors.white54),
             label: 'Home',
-
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.business, color: Colors.white54),
             label: 'Business',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school, color: Colors.white54,),
+            icon: Icon(
+              Icons.school,
+              color: Colors.white54,
+            ),
             label: 'School',
           ),
         ],
