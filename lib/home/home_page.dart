@@ -156,9 +156,14 @@ class _HomePageState extends State<HomePage> {
                                               ),
                                             ),
                                             onTap: () {
-                                              controller
-                                                  .selecionarFilmeVoteRage8(
-                                                      index);
+                                              controller.selecionarFilmeVoteRage8(index);
+                                                    Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute<void>(
+                                                        builder: (_) =>
+                                                            DetalhesFilmePage(controller: controller),
+                                                      ),
+                                                    );
                                             },
                                           ),
                                         ),

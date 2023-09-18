@@ -43,11 +43,13 @@ class _DetalhesFilmePageState extends State<DetalhesFilmePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.black87,
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: Colors.black87,
-        title: const Text(''),
+        title: Text('MathFlix',
+            style: GoogleFonts.montserrat(
+                color: Colors.white60, fontWeight: FontWeight.bold)),
       ),
       body: ListView(
         children: [
@@ -70,9 +72,19 @@ class _DetalhesFilmePageState extends State<DetalhesFilmePage> {
                 const SizedBox(
                   height: 16,
                 ),
-                Text(
-                  'Avaliação: ${widget.controller.voteAverageEC.text}',
-                  style: GoogleFonts.montserrat(color: Colors.white60),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Avaliação: ${widget.controller.voteAverageEC.text}',
+                      style: GoogleFonts.montserrat(color: Colors.white60),
+                    ), 
+                    SizedBox(width: 8,),
+                    widget.controller.estrelasAvaliacao(),
+                  ],
+                ),
+                 const SizedBox(
+                  height: 16,
                 ),
               ],
             ),
@@ -81,13 +93,26 @@ class _DetalhesFilmePageState extends State<DetalhesFilmePage> {
             padding: const EdgeInsets.all(8.0),
             child: Text(
                widget.controller.originalTitleEC.text,
-              style: GoogleFonts.montserrat(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 25),
+              style: GoogleFonts.montserrat(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 25),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(widget.controller.overviewEC.text, style: GoogleFonts.montserrat(color: Colors.white),),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                Text('Language: ', style: GoogleFonts.montserrat(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),),
+                Text(widget.controller.linguagemFilme(widget.controller.originalLanguageEC.text), style: GoogleFonts.montserrat(color: Colors.white),),
+              ],
             ),
           ),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.black54,
+        backgroundColor: Colors.black87,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home, color: Colors.white54),
